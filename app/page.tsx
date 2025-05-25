@@ -5,29 +5,18 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import {
   Loader2,
   Settings,
   Eye,
   EyeOff,
   Truck,
-  Zap,
   Shield,
   ArrowRight,
   ChevronLeft,
-  Sparkles,
-  Globe,
-  Lock,
-  Users,
-  BarChart3,
+  Building2,
+  CheckCircle,
 } from "lucide-react"
 import { supabase } from "@/lib/supabase"
 
@@ -380,115 +369,97 @@ export default function AuthPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl animate-float"></div>
-        <div
-          className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl animate-float"
-          style={{ animationDelay: "2s" }}
-        ></div>
-        <div
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-float"
-          style={{ animationDelay: "4s" }}
-        ></div>
-      </div>
+    <div className="min-h-screen bg-slate-50 relative">
+      {/* Super Admin Access - Top Right Corner */}
+      <button
+        onClick={() => {
+          setDevModeOpen(true)
+          clearDevForm()
+        }}
+        className="fixed top-4 right-4 w-8 h-8 bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-300 rounded-lg transition-all duration-200 opacity-60 hover:opacity-100 z-50 shadow-sm"
+        aria-label="Super Admin Access"
+      >
+        <Settings className="w-4 h-4 text-slate-500 hover:text-slate-700 mx-auto" />
+      </button>
 
-      {/* Grid pattern overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
-
-      <div className="relative z-10 flex items-center justify-center min-h-screen p-4">
-        <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-8 items-center">
-          {/* Left Side - Branding */}
+      <div className="flex items-center justify-center min-h-screen p-4">
+        <div className="w-full max-w-5xl grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left Side - Professional Branding */}
           <div
-            className={`text-center lg:text-left space-y-8 transition-all duration-1000 ${mounted ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"}`}
+            className={`text-center lg:text-left space-y-8 transition-all duration-700 ${mounted ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4"}`}
           >
             <div className="space-y-6">
+              {/* Logo and Brand */}
               <div className="flex items-center justify-center lg:justify-start gap-4">
-                <div className="relative">
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center animate-float">
-                    <Truck className="w-8 h-8 text-white" />
-                  </div>
-                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full flex items-center justify-center animate-pulse">
-                    <Sparkles className="w-3 h-3 text-white" />
-                  </div>
+                <div className="w-12 h-12 bg-slate-900 rounded-lg flex items-center justify-center">
+                  <Truck className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h1 className="text-5xl font-bold gradient-text">DeliveryOS</h1>
-                  <p className="text-slate-400 text-lg font-light">Next-generation delivery management</p>
+                  <h1 className="text-3xl font-bold text-slate-900">DeliveryOS</h1>
+                  <p className="text-slate-600 text-sm font-medium">Enterprise Logistics Platform</p>
                 </div>
               </div>
 
+              {/* Value Proposition */}
               <div className="space-y-4">
-                <h2 className="text-3xl font-bold text-white">
-                  Revolutionize Your <span className="gradient-text-gold">Delivery Operations</span>
+                <h2 className="text-2xl font-semibold text-slate-900 leading-tight">
+                  Professional delivery management for modern businesses
                 </h2>
-                <p className="text-xl text-slate-300 leading-relaxed">
-                  Experience the future of logistics with our AI-powered platform that streamlines every aspect of your
-                  delivery workflow.
+                <p className="text-lg text-slate-600 leading-relaxed">
+                  Streamline operations, optimize routes, and manage your delivery fleet with enterprise-grade tools
+                  designed for efficiency and reliability.
                 </p>
               </div>
 
-              {/* Features Grid */}
-              <div className="grid grid-cols-2 gap-4 mt-8">
-                <div className="premium-card p-4 hover-lift">
-                  <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center mb-3">
-                    <Globe className="w-5 h-5 text-white" />
+              {/* Key Features */}
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <h3 className="font-semibold text-slate-900">Real-time Tracking</h3>
+                    <p className="text-sm text-slate-600">Monitor deliveries and fleet status in real-time</p>
                   </div>
-                  <h3 className="font-semibold text-white mb-1">Global Reach</h3>
-                  <p className="text-sm text-slate-400">Worldwide delivery network</p>
                 </div>
-                <div className="premium-card p-4 hover-lift">
-                  <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center mb-3">
-                    <Lock className="w-5 h-5 text-white" />
+                <div className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <h3 className="font-semibold text-slate-900">Route Optimization</h3>
+                    <p className="text-sm text-slate-600">AI-powered routing for maximum efficiency</p>
                   </div>
-                  <h3 className="font-semibold text-white mb-1">Secure</h3>
-                  <p className="text-sm text-slate-400">Enterprise-grade security</p>
                 </div>
-                <div className="premium-card p-4 hover-lift">
-                  <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg flex items-center justify-center mb-3">
-                    <Users className="w-5 h-5 text-white" />
+                <div className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <h3 className="font-semibold text-slate-900">Analytics Dashboard</h3>
+                    <p className="text-sm text-slate-600">Comprehensive reporting and performance metrics</p>
                   </div>
-                  <h3 className="font-semibold text-white mb-1">Team Management</h3>
-                  <p className="text-sm text-slate-400">Efficient team coordination</p>
-                </div>
-                <div className="premium-card p-4 hover-lift">
-                  <div className="w-10 h-10 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg flex items-center justify-center mb-3">
-                    <BarChart3 className="w-5 h-5 text-white" />
-                  </div>
-                  <h3 className="font-semibold text-white mb-1">Analytics</h3>
-                  <p className="text-sm text-slate-400">Real-time insights</p>
                 </div>
               </div>
 
-              {/* Demo Access Cards */}
-              <div className="space-y-3">
-                <h3 className="text-lg font-semibold text-white">Quick Demo Access</h3>
-                <div className="grid gap-3">
+              {/* Demo Access */}
+              <div className="space-y-3 pt-4 border-t border-slate-200">
+                <h3 className="text-sm font-semibold text-slate-900 uppercase tracking-wide">Demo Access</h3>
+                <div className="grid gap-2">
                   <button
                     onClick={() => handleDemoLogin("admin")}
                     disabled={isLoading}
-                    className="premium-card p-3 hover-lift text-left transition-all duration-300 hover:border-blue-500/50 disabled:opacity-50"
+                    className="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-lg hover:border-slate-300 hover:bg-slate-50 transition-all duration-200 text-left disabled:opacity-50"
                   >
-                    <div className="flex items-center gap-3">
-                      <Shield className="w-5 h-5 text-blue-400" />
-                      <div>
-                        <div className="font-medium text-white">Admin Demo</div>
-                        <div className="text-sm text-slate-400">Management dashboard</div>
-                      </div>
+                    <Building2 className="w-4 h-4 text-slate-600" />
+                    <div>
+                      <div className="font-medium text-slate-900 text-sm">Admin Dashboard</div>
+                      <div className="text-xs text-slate-500">Management interface</div>
                     </div>
                   </button>
                   <button
                     onClick={() => handleDemoLogin("driver")}
                     disabled={isLoading}
-                    className="premium-card p-3 hover-lift text-left transition-all duration-300 hover:border-green-500/50 disabled:opacity-50"
+                    className="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-lg hover:border-slate-300 hover:bg-slate-50 transition-all duration-200 text-left disabled:opacity-50"
                   >
-                    <div className="flex items-center gap-3">
-                      <Truck className="w-5 h-5 text-green-400" />
-                      <div>
-                        <div className="font-medium text-white">Driver Demo</div>
-                        <div className="text-sm text-slate-400">Delivery interface</div>
-                      </div>
+                    <Truck className="w-4 h-4 text-slate-600" />
+                    <div>
+                      <div className="font-medium text-slate-900 text-sm">Driver Interface</div>
+                      <div className="text-xs text-slate-500">Mobile-optimized delivery app</div>
                     </div>
                   </button>
                 </div>
@@ -496,38 +467,38 @@ export default function AuthPage() {
             </div>
           </div>
 
-          {/* Right Side - Auth Form */}
+          {/* Right Side - Clean Auth Form */}
           <div
-            className={`transition-all duration-1000 delay-300 ${mounted ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"}`}
+            className={`transition-all duration-700 delay-200 ${mounted ? "opacity-100 translate-x-0" : "opacity-0 translate-x-4"}`}
           >
-            <Card className="premium-card border-white/10 shadow-2xl">
+            <Card className="bg-white border border-slate-200 shadow-lg">
               <CardContent className="p-8">
                 {/* Role Selector */}
-                <div className="flex mb-8 bg-slate-900/50 rounded-xl p-1 backdrop-blur-sm">
+                <div className="flex mb-8 bg-slate-100 rounded-lg p-1">
                   <button
                     onClick={() => setActiveTab("admin")}
-                    className={`flex-1 py-4 px-6 rounded-lg text-sm font-semibold transition-all duration-300 ${
+                    className={`flex-1 py-3 px-4 rounded-md text-sm font-medium transition-all duration-200 ${
                       activeTab === "admin"
-                        ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg transform scale-105"
-                        : "text-slate-400 hover:text-white hover:bg-white/5"
+                        ? "bg-white text-slate-900 shadow-sm"
+                        : "text-slate-600 hover:text-slate-900"
                     }`}
                   >
                     <div className="flex items-center justify-center gap-2">
                       <Shield className="w-4 h-4" />
-                      Admin Portal
+                      Administrator
                     </div>
                   </button>
                   <button
                     onClick={() => setActiveTab("driver")}
-                    className={`flex-1 py-4 px-6 rounded-lg text-sm font-semibold transition-all duration-300 ${
+                    className={`flex-1 py-3 px-4 rounded-md text-sm font-medium transition-all duration-200 ${
                       activeTab === "driver"
-                        ? "bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-lg transform scale-105"
-                        : "text-slate-400 hover:text-white hover:bg-white/5"
+                        ? "bg-white text-slate-900 shadow-sm"
+                        : "text-slate-600 hover:text-slate-900"
                     }`}
                   >
                     <div className="flex items-center justify-center gap-2">
-                      <Zap className="w-4 h-4" />
-                      Driver Hub
+                      <Truck className="w-4 h-4" />
+                      Driver
                     </div>
                   </button>
                 </div>
@@ -536,13 +507,15 @@ export default function AuthPage() {
                   // Login Form
                   <div className="space-y-6">
                     <div className="text-center space-y-2">
-                      <h2 className="text-2xl font-bold text-white">Welcome Back</h2>
-                      <p className="text-slate-400">Sign in to your {activeTab} account</p>
+                      <h2 className="text-xl font-semibold text-slate-900">Sign In</h2>
+                      <p className="text-slate-600 text-sm">
+                        Access your {activeTab === "admin" ? "administrator" : "driver"} account
+                      </p>
                     </div>
 
                     <div className="space-y-4">
                       <div className="space-y-2">
-                        <Label htmlFor="email" className="text-slate-300 text-sm font-medium">
+                        <Label htmlFor="email" className="text-slate-700 text-sm font-medium">
                           Email Address
                         </Label>
                         <Input
@@ -551,12 +524,12 @@ export default function AuthPage() {
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder="Enter your email"
-                          className="premium-input h-12"
+                          className="h-11 border-slate-300 focus:border-slate-500 focus:ring-slate-500"
                         />
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="password" className="text-slate-300 text-sm font-medium">
+                        <Label htmlFor="password" className="text-slate-700 text-sm font-medium">
                           Password
                         </Label>
                         <div className="relative">
@@ -566,14 +539,14 @@ export default function AuthPage() {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             placeholder="Enter your password"
-                            className="premium-input h-12 pr-12"
+                            className="h-11 border-slate-300 focus:border-slate-500 focus:ring-slate-500 pr-10"
                           />
                           <button
                             type="button"
                             onClick={() => setShowPassword(!showPassword)}
-                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-white transition-colors"
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
                           >
-                            {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                            {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                           </button>
                         </div>
                       </div>
@@ -582,12 +555,12 @@ export default function AuthPage() {
                     <Button
                       onClick={() => handleSignIn(activeTab)}
                       disabled={isLoading}
-                      className="premium-button w-full h-12 text-base font-semibold"
+                      className="w-full h-11 bg-slate-900 hover:bg-slate-800 text-white font-medium"
                     >
                       {isLoading ? (
-                        <Loader2 className="w-5 h-5 animate-spin mr-2" />
+                        <Loader2 className="w-4 h-4 animate-spin mr-2" />
                       ) : (
-                        <ArrowRight className="w-5 h-5 mr-2" />
+                        <ArrowRight className="w-4 h-4 mr-2" />
                       )}
                       {isLoading ? "Signing In..." : "Sign In"}
                     </Button>
@@ -595,9 +568,9 @@ export default function AuthPage() {
                     <div className="text-center">
                       <button
                         onClick={switchToSignup}
-                        className="text-slate-400 hover:text-blue-400 text-sm transition-colors duration-300 font-medium"
+                        className="text-slate-600 hover:text-slate-900 text-sm transition-colors duration-200 font-medium"
                       >
-                        Don't have an account? <span className="text-blue-400">Create one</span>
+                        Need an account? <span className="text-slate-900">Create one</span>
                       </button>
                     </div>
                   </div>
@@ -607,19 +580,19 @@ export default function AuthPage() {
                     <div className="flex items-center mb-4">
                       <button
                         onClick={switchToLogin}
-                        className="text-slate-400 hover:text-white transition-colors mr-3 p-1 rounded-lg hover:bg-white/10"
+                        className="text-slate-600 hover:text-slate-900 transition-colors mr-3 p-1 rounded-md hover:bg-slate-100"
                       >
-                        <ChevronLeft className="w-5 h-5" />
+                        <ChevronLeft className="w-4 h-4" />
                       </button>
                       <div>
-                        <h2 className="text-2xl font-bold text-white">Create Account</h2>
-                        <p className="text-slate-400">Join the delivery network</p>
+                        <h2 className="text-xl font-semibold text-slate-900">Create Account</h2>
+                        <p className="text-slate-600 text-sm">Join the delivery network</p>
                       </div>
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="firstName" className="text-slate-300 text-sm font-medium">
+                        <Label htmlFor="firstName" className="text-slate-700 text-sm font-medium">
                           First Name *
                         </Label>
                         <Input
@@ -627,11 +600,11 @@ export default function AuthPage() {
                           value={firstName}
                           onChange={(e) => setFirstName(e.target.value)}
                           placeholder="John"
-                          className="premium-input h-11"
+                          className="h-10 border-slate-300 focus:border-slate-500 focus:ring-slate-500"
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="lastName" className="text-slate-300 text-sm font-medium">
+                        <Label htmlFor="lastName" className="text-slate-700 text-sm font-medium">
                           Last Name
                         </Label>
                         <Input
@@ -639,13 +612,13 @@ export default function AuthPage() {
                           value={lastName}
                           onChange={(e) => setLastName(e.target.value)}
                           placeholder="Doe"
-                          className="premium-input h-11"
+                          className="h-10 border-slate-300 focus:border-slate-500 focus:ring-slate-500"
                         />
                       </div>
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="signupEmail" className="text-slate-300 text-sm font-medium">
+                      <Label htmlFor="signupEmail" className="text-slate-700 text-sm font-medium">
                         Email Address *
                       </Label>
                       <Input
@@ -653,13 +626,13 @@ export default function AuthPage() {
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        placeholder="john@example.com"
-                        className="premium-input h-12"
+                        placeholder="john@company.com"
+                        className="h-11 border-slate-300 focus:border-slate-500 focus:ring-slate-500"
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="signupPassword" className="text-slate-300 text-sm font-medium">
+                      <Label htmlFor="signupPassword" className="text-slate-700 text-sm font-medium">
                         Password *
                       </Label>
                       <Input
@@ -667,13 +640,13 @@ export default function AuthPage() {
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        placeholder="Create a strong password"
-                        className="premium-input h-12"
+                        placeholder="Create a secure password"
+                        className="h-11 border-slate-300 focus:border-slate-500 focus:ring-slate-500"
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="confirmPassword" className="text-slate-300 text-sm font-medium">
+                      <Label htmlFor="confirmPassword" className="text-slate-700 text-sm font-medium">
                         Confirm Password *
                       </Label>
                       <Input
@@ -682,39 +655,39 @@ export default function AuthPage() {
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         placeholder="Confirm your password"
-                        className="premium-input h-12"
+                        className="h-11 border-slate-300 focus:border-slate-500 focus:ring-slate-500"
                       />
                     </div>
 
                     <Button
                       onClick={() => handleSignUp(activeTab)}
                       disabled={isLoading}
-                      className="premium-button w-full h-12 text-base font-semibold bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+                      className="w-full h-11 bg-slate-900 hover:bg-slate-800 text-white font-medium"
                     >
                       {isLoading ? (
-                        <Loader2 className="w-5 h-5 animate-spin mr-2" />
+                        <Loader2 className="w-4 h-4 animate-spin mr-2" />
                       ) : (
-                        <ArrowRight className="w-5 h-5 mr-2" />
+                        <ArrowRight className="w-4 h-4 mr-2" />
                       )}
                       {isLoading
                         ? "Creating Account..."
-                        : `Create ${activeTab === "admin" ? "Admin" : "Driver"} Account`}
+                        : `Create ${activeTab === "admin" ? "Administrator" : "Driver"} Account`}
                     </Button>
 
                     <div className="text-center">
                       <button
                         onClick={switchToLogin}
-                        className="text-slate-400 hover:text-blue-400 text-sm transition-colors duration-300 font-medium"
+                        className="text-slate-600 hover:text-slate-900 text-sm transition-colors duration-200 font-medium"
                       >
-                        Already have an account? <span className="text-blue-400">Sign in</span>
+                        Already have an account? <span className="text-slate-900">Sign in</span>
                       </button>
                     </div>
                   </div>
                 )}
 
                 {error && (
-                  <div className="mt-4 p-4 bg-red-500/10 border border-red-500/20 rounded-xl backdrop-blur-sm">
-                    <p className="text-red-400 text-sm text-center font-medium">{error}</p>
+                  <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+                    <p className="text-red-700 text-sm text-center font-medium">{error}</p>
                   </div>
                 )}
               </CardContent>
@@ -725,32 +698,19 @@ export default function AuthPage() {
 
       {/* Developer/Super Admin Mode */}
       <Dialog open={devModeOpen} onOpenChange={setDevModeOpen}>
-        <DialogTrigger asChild>
-          <Button
-            variant="ghost"
-            size="sm"
-            className="absolute top-6 right-6 opacity-30 hover:opacity-100 transition-all duration-300 text-slate-400 hover:text-white hover:bg-white/10 rounded-xl"
-            onClick={() => {
-              setDevModeOpen(true)
-              clearDevForm()
-            }}
-          >
-            <Settings className="h-4 w-4" />
-          </Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-md premium-card border-white/10">
+        <DialogContent className="sm:max-w-md bg-white border border-slate-200">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2 text-white">
-              <Settings className="h-5 w-5 text-cyan-400" />
-              Developer Mode
+            <DialogTitle className="flex items-center gap-2 text-slate-900">
+              <Settings className="h-5 w-5 text-slate-600" />
+              System Administration
             </DialogTitle>
-            <DialogDescription className="text-slate-400">
-              Enter super admin credentials to access system administration.
+            <DialogDescription className="text-slate-600">
+              Enter super administrator credentials to access system management.
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="dev-email" className="text-slate-300">
+              <Label htmlFor="dev-email" className="text-slate-700">
                 Email Address
               </Label>
               <Input
@@ -760,11 +720,11 @@ export default function AuthPage() {
                 onChange={(e) => setDevEmail(e.target.value)}
                 placeholder="Enter email address"
                 disabled={devLoading}
-                className="premium-input"
+                className="border-slate-300 focus:border-slate-500 focus:ring-slate-500"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="dev-password" className="text-slate-300">
+              <Label htmlFor="dev-password" className="text-slate-700">
                 Password
               </Label>
               <div className="relative">
@@ -775,13 +735,13 @@ export default function AuthPage() {
                   onChange={(e) => setDevPassword(e.target.value)}
                   placeholder="Enter password"
                   disabled={devLoading}
-                  className="premium-input pr-12"
+                  className="border-slate-300 focus:border-slate-500 focus:ring-slate-500 pr-10"
                 />
                 <button
                   type="button"
                   onClick={() => setShowDevPassword(!showDevPassword)}
                   disabled={devLoading}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-white"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600"
                 >
                   {showDevPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
@@ -789,8 +749,8 @@ export default function AuthPage() {
             </div>
 
             {devError && (
-              <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-lg">
-                <p className="text-sm text-red-400">{devError}</p>
+              <div className="p-3 bg-red-50 border border-red-200 rounded-lg">
+                <p className="text-sm text-red-700">{devError}</p>
               </div>
             )}
 
@@ -798,7 +758,7 @@ export default function AuthPage() {
               <Button
                 onClick={handleDevModeLogin}
                 disabled={devLoading || !devEmail || !devPassword}
-                className="premium-button flex-1"
+                className="flex-1 bg-slate-900 hover:bg-slate-800 text-white"
               >
                 {devLoading ? (
                   <>
@@ -806,7 +766,7 @@ export default function AuthPage() {
                     Authenticating...
                   </>
                 ) : (
-                  "Access Super Admin"
+                  "Access System"
                 )}
               </Button>
               <Button
@@ -816,14 +776,14 @@ export default function AuthPage() {
                   clearDevForm()
                 }}
                 disabled={devLoading}
-                className="border-white/20 text-slate-300 hover:bg-white/10 hover:text-white"
+                className="border-slate-300 text-slate-700 hover:bg-slate-50"
               >
                 Cancel
               </Button>
             </div>
 
             <div className="text-xs text-slate-500 text-center">
-              Developer/Super Admin access only. All login attempts are logged.
+              Super administrator access only. All login attempts are logged.
             </div>
           </div>
         </DialogContent>
