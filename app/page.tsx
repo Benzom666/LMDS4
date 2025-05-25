@@ -6,18 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import {
-  Loader2,
-  Settings,
-  Eye,
-  EyeOff,
-  Truck,
-  Shield,
-  ArrowRight,
-  ChevronLeft,
-  Building2,
-  CheckCircle,
-} from "lucide-react"
+import { Loader2, Settings, Eye, EyeOff, Truck, ArrowRight, ChevronLeft } from "lucide-react"
 import { supabase } from "@/lib/supabase"
 
 export default function AuthPage() {
@@ -369,154 +358,81 @@ export default function AuthPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 relative">
-      {/* Super Admin Access - Top Right Corner */}
+    <div className="min-h-screen bg-white">
+      {/* Clean Super Admin Access Button */}
       <button
         onClick={() => {
           setDevModeOpen(true)
           clearDevForm()
         }}
-        className="fixed top-4 right-4 w-8 h-8 bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-300 rounded-lg transition-all duration-200 opacity-60 hover:opacity-100 z-50 shadow-sm"
+        className="fixed top-4 right-4 w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors duration-200 opacity-50 hover:opacity-100 z-50 flex items-center justify-center"
         aria-label="Super Admin Access"
       >
-        <Settings className="w-4 h-4 text-slate-500 hover:text-slate-700 mx-auto" />
+        <Settings className="w-4 h-4 text-gray-600" />
       </button>
 
       <div className="flex items-center justify-center min-h-screen p-4">
-        <div className="w-full max-w-5xl grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Side - Professional Branding */}
+        <div className="w-full max-w-4xl grid lg:grid-cols-2 gap-16 items-center">
+          {/* Left Side - Simple Branding */}
           <div
-            className={`text-center lg:text-left space-y-8 transition-all duration-700 ${mounted ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4"}`}
+            className={`text-center lg:text-left space-y-8 transition-opacity duration-500 ${mounted ? "opacity-100" : "opacity-0"}`}
           >
-            <div className="space-y-6">
-              {/* Logo and Brand */}
-              <div className="flex items-center justify-center lg:justify-start gap-4">
-                <div className="w-12 h-12 bg-slate-900 rounded-lg flex items-center justify-center">
-                  <Truck className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h1 className="text-3xl font-bold text-slate-900">DeliveryOS</h1>
-                  <p className="text-slate-600 text-sm font-medium">Enterprise Logistics Platform</p>
-                </div>
+            {/* Logo */}
+            <div className="flex items-center justify-center lg:justify-start gap-3">
+              <div className="w-10 h-10 bg-black rounded-lg flex items-center justify-center">
+                <Truck className="w-5 h-5 text-white" />
               </div>
+              <div>
+                <h1 className="text-2xl font-semibold text-black">DeliveryOS</h1>
+                <p className="text-gray-500 text-sm">Delivery Management</p>
+              </div>
+            </div>
 
-              {/* Value Proposition */}
-              <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-slate-900 leading-tight">
-                  Professional delivery management for modern businesses
-                </h2>
-                <p className="text-lg text-slate-600 leading-relaxed">
-                  Streamline operations, optimize routes, and manage your delivery fleet with enterprise-grade tools
-                  designed for efficiency and reliability.
-                </p>
-              </div>
-
-              {/* Key Features */}
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold text-slate-900">Real-time Tracking</h3>
-                    <p className="text-sm text-slate-600">Monitor deliveries and fleet status in real-time</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold text-slate-900">Route Optimization</h3>
-                    <p className="text-sm text-slate-600">AI-powered routing for maximum efficiency</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold text-slate-900">Analytics Dashboard</h3>
-                    <p className="text-sm text-slate-600">Comprehensive reporting and performance metrics</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Demo Access */}
-              <div className="space-y-3 pt-4 border-t border-slate-200">
-                <h3 className="text-sm font-semibold text-slate-900 uppercase tracking-wide">Demo Access</h3>
-                <div className="grid gap-2">
-                  <button
-                    onClick={() => handleDemoLogin("admin")}
-                    disabled={isLoading}
-                    className="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-lg hover:border-slate-300 hover:bg-slate-50 transition-all duration-200 text-left disabled:opacity-50"
-                  >
-                    <Building2 className="w-4 h-4 text-slate-600" />
-                    <div>
-                      <div className="font-medium text-slate-900 text-sm">Admin Dashboard</div>
-                      <div className="text-xs text-slate-500">Management interface</div>
-                    </div>
-                  </button>
-                  <button
-                    onClick={() => handleDemoLogin("driver")}
-                    disabled={isLoading}
-                    className="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-lg hover:border-slate-300 hover:bg-slate-50 transition-all duration-200 text-left disabled:opacity-50"
-                  >
-                    <Truck className="w-4 h-4 text-slate-600" />
-                    <div>
-                      <div className="font-medium text-slate-900 text-sm">Driver Interface</div>
-                      <div className="text-xs text-slate-500">Mobile-optimized delivery app</div>
-                    </div>
-                  </button>
-                </div>
-              </div>
+            {/* Simple Description */}
+            <div className="space-y-4">
+              <h2 className="text-xl font-medium text-black">Simple. Efficient. Reliable.</h2>
+              <p className="text-gray-600 leading-relaxed">
+                Streamline your delivery operations with our clean and intuitive platform.
+              </p>
             </div>
           </div>
 
           {/* Right Side - Clean Auth Form */}
-          <div
-            className={`transition-all duration-700 delay-200 ${mounted ? "opacity-100 translate-x-0" : "opacity-0 translate-x-4"}`}
-          >
-            <Card className="bg-white border border-slate-200 shadow-lg">
+          <div className={`transition-opacity duration-500 delay-200 ${mounted ? "opacity-100" : "opacity-0"}`}>
+            <Card className="border border-gray-200 shadow-sm">
               <CardContent className="p-8">
                 {/* Role Selector */}
-                <div className="flex mb-8 bg-slate-100 rounded-lg p-1">
+                <div className="flex mb-8 bg-gray-100 rounded-lg p-1">
                   <button
                     onClick={() => setActiveTab("admin")}
-                    className={`flex-1 py-3 px-4 rounded-md text-sm font-medium transition-all duration-200 ${
-                      activeTab === "admin"
-                        ? "bg-white text-slate-900 shadow-sm"
-                        : "text-slate-600 hover:text-slate-900"
+                    className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
+                      activeTab === "admin" ? "bg-white text-black shadow-sm" : "text-gray-600 hover:text-black"
                     }`}
                   >
-                    <div className="flex items-center justify-center gap-2">
-                      <Shield className="w-4 h-4" />
-                      Administrator
-                    </div>
+                    Admin
                   </button>
                   <button
                     onClick={() => setActiveTab("driver")}
-                    className={`flex-1 py-3 px-4 rounded-md text-sm font-medium transition-all duration-200 ${
-                      activeTab === "driver"
-                        ? "bg-white text-slate-900 shadow-sm"
-                        : "text-slate-600 hover:text-slate-900"
+                    className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
+                      activeTab === "driver" ? "bg-white text-black shadow-sm" : "text-gray-600 hover:text-black"
                     }`}
                   >
-                    <div className="flex items-center justify-center gap-2">
-                      <Truck className="w-4 h-4" />
-                      Driver
-                    </div>
+                    Driver
                   </button>
                 </div>
 
                 {!showSignup ? (
                   // Login Form
                   <div className="space-y-6">
-                    <div className="text-center space-y-2">
-                      <h2 className="text-xl font-semibold text-slate-900">Sign In</h2>
-                      <p className="text-slate-600 text-sm">
-                        Access your {activeTab === "admin" ? "administrator" : "driver"} account
-                      </p>
+                    <div className="text-center space-y-1">
+                      <h2 className="text-xl font-semibold text-black">Sign In</h2>
+                      <p className="text-gray-600 text-sm">Welcome back</p>
                     </div>
 
                     <div className="space-y-4">
                       <div className="space-y-2">
-                        <Label htmlFor="email" className="text-slate-700 text-sm font-medium">
-                          Email Address
+                        <Label htmlFor="email" className="text-gray-700 text-sm">
+                          Email
                         </Label>
                         <Input
                           id="email"
@@ -524,12 +440,12 @@ export default function AuthPage() {
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder="Enter your email"
-                          className="h-11 border-slate-300 focus:border-slate-500 focus:ring-slate-500"
+                          className="h-10 border-gray-300 focus:border-black focus:ring-black"
                         />
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="password" className="text-slate-700 text-sm font-medium">
+                        <Label htmlFor="password" className="text-gray-700 text-sm">
                           Password
                         </Label>
                         <div className="relative">
@@ -539,12 +455,12 @@ export default function AuthPage() {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             placeholder="Enter your password"
-                            className="h-11 border-slate-300 focus:border-slate-500 focus:ring-slate-500 pr-10"
+                            className="h-10 border-gray-300 focus:border-black focus:ring-black pr-10"
                           />
                           <button
                             type="button"
                             onClick={() => setShowPassword(!showPassword)}
-                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
                           >
                             {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                           </button>
@@ -555,22 +471,22 @@ export default function AuthPage() {
                     <Button
                       onClick={() => handleSignIn(activeTab)}
                       disabled={isLoading}
-                      className="w-full h-11 bg-slate-900 hover:bg-slate-800 text-white font-medium"
+                      className="w-full h-10 bg-black hover:bg-gray-800 text-white"
                     >
                       {isLoading ? (
                         <Loader2 className="w-4 h-4 animate-spin mr-2" />
                       ) : (
                         <ArrowRight className="w-4 h-4 mr-2" />
                       )}
-                      {isLoading ? "Signing In..." : "Sign In"}
+                      {isLoading ? "Signing in..." : "Sign In"}
                     </Button>
 
                     <div className="text-center">
                       <button
                         onClick={switchToSignup}
-                        className="text-slate-600 hover:text-slate-900 text-sm transition-colors duration-200 font-medium"
+                        className="text-gray-600 hover:text-black text-sm transition-colors"
                       >
-                        Need an account? <span className="text-slate-900">Create one</span>
+                        Don't have an account? <span className="font-medium">Sign up</span>
                       </button>
                     </div>
                   </div>
@@ -580,31 +496,31 @@ export default function AuthPage() {
                     <div className="flex items-center mb-4">
                       <button
                         onClick={switchToLogin}
-                        className="text-slate-600 hover:text-slate-900 transition-colors mr-3 p-1 rounded-md hover:bg-slate-100"
+                        className="text-gray-600 hover:text-black transition-colors mr-3 p-1 rounded-md hover:bg-gray-100"
                       >
                         <ChevronLeft className="w-4 h-4" />
                       </button>
                       <div>
-                        <h2 className="text-xl font-semibold text-slate-900">Create Account</h2>
-                        <p className="text-slate-600 text-sm">Join the delivery network</p>
+                        <h2 className="text-xl font-semibold text-black">Create Account</h2>
+                        <p className="text-gray-600 text-sm">Get started today</p>
                       </div>
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="firstName" className="text-slate-700 text-sm font-medium">
-                          First Name *
+                        <Label htmlFor="firstName" className="text-gray-700 text-sm">
+                          First Name
                         </Label>
                         <Input
                           id="firstName"
                           value={firstName}
                           onChange={(e) => setFirstName(e.target.value)}
                           placeholder="John"
-                          className="h-10 border-slate-300 focus:border-slate-500 focus:ring-slate-500"
+                          className="h-10 border-gray-300 focus:border-black focus:ring-black"
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="lastName" className="text-slate-700 text-sm font-medium">
+                        <Label htmlFor="lastName" className="text-gray-700 text-sm">
                           Last Name
                         </Label>
                         <Input
@@ -612,42 +528,42 @@ export default function AuthPage() {
                           value={lastName}
                           onChange={(e) => setLastName(e.target.value)}
                           placeholder="Doe"
-                          className="h-10 border-slate-300 focus:border-slate-500 focus:ring-slate-500"
+                          className="h-10 border-gray-300 focus:border-black focus:ring-black"
                         />
                       </div>
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="signupEmail" className="text-slate-700 text-sm font-medium">
-                        Email Address *
+                      <Label htmlFor="signupEmail" className="text-gray-700 text-sm">
+                        Email
                       </Label>
                       <Input
                         id="signupEmail"
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        placeholder="john@company.com"
-                        className="h-11 border-slate-300 focus:border-slate-500 focus:ring-slate-500"
+                        placeholder="john@example.com"
+                        className="h-10 border-gray-300 focus:border-black focus:ring-black"
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="signupPassword" className="text-slate-700 text-sm font-medium">
-                        Password *
+                      <Label htmlFor="signupPassword" className="text-gray-700 text-sm">
+                        Password
                       </Label>
                       <Input
                         id="signupPassword"
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        placeholder="Create a secure password"
-                        className="h-11 border-slate-300 focus:border-slate-500 focus:ring-slate-500"
+                        placeholder="Create a password"
+                        className="h-10 border-gray-300 focus:border-black focus:ring-black"
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="confirmPassword" className="text-slate-700 text-sm font-medium">
-                        Confirm Password *
+                      <Label htmlFor="confirmPassword" className="text-gray-700 text-sm">
+                        Confirm Password
                       </Label>
                       <Input
                         id="confirmPassword"
@@ -655,31 +571,29 @@ export default function AuthPage() {
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         placeholder="Confirm your password"
-                        className="h-11 border-slate-300 focus:border-slate-500 focus:ring-slate-500"
+                        className="h-10 border-gray-300 focus:border-black focus:ring-black"
                       />
                     </div>
 
                     <Button
                       onClick={() => handleSignUp(activeTab)}
                       disabled={isLoading}
-                      className="w-full h-11 bg-slate-900 hover:bg-slate-800 text-white font-medium"
+                      className="w-full h-10 bg-black hover:bg-gray-800 text-white"
                     >
                       {isLoading ? (
                         <Loader2 className="w-4 h-4 animate-spin mr-2" />
                       ) : (
                         <ArrowRight className="w-4 h-4 mr-2" />
                       )}
-                      {isLoading
-                        ? "Creating Account..."
-                        : `Create ${activeTab === "admin" ? "Administrator" : "Driver"} Account`}
+                      {isLoading ? "Creating account..." : "Create Account"}
                     </Button>
 
                     <div className="text-center">
                       <button
                         onClick={switchToLogin}
-                        className="text-slate-600 hover:text-slate-900 text-sm transition-colors duration-200 font-medium"
+                        className="text-gray-600 hover:text-black text-sm transition-colors"
                       >
-                        Already have an account? <span className="text-slate-900">Sign in</span>
+                        Already have an account? <span className="font-medium">Sign in</span>
                       </button>
                     </div>
                   </div>
@@ -687,7 +601,7 @@ export default function AuthPage() {
 
                 {error && (
                   <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg">
-                    <p className="text-red-700 text-sm text-center font-medium">{error}</p>
+                    <p className="text-red-700 text-sm text-center">{error}</p>
                   </div>
                 )}
               </CardContent>
@@ -696,37 +610,30 @@ export default function AuthPage() {
         </div>
       </div>
 
-      {/* Developer/Super Admin Mode */}
+      {/* Clean Developer/Super Admin Mode */}
       <Dialog open={devModeOpen} onOpenChange={setDevModeOpen}>
-        <DialogContent className="sm:max-w-md bg-white border border-slate-200">
+        <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2 text-slate-900">
-              <Settings className="h-5 w-5 text-slate-600" />
-              System Administration
+            <DialogTitle className="flex items-center gap-2">
+              <Settings className="h-5 w-5 text-gray-600" />
+              Admin Access
             </DialogTitle>
-            <DialogDescription className="text-slate-600">
-              Enter super administrator credentials to access system management.
-            </DialogDescription>
+            <DialogDescription>Enter super admin credentials to access system administration.</DialogDescription>
           </DialogHeader>
           <div className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="dev-email" className="text-slate-700">
-                Email Address
-              </Label>
+              <Label htmlFor="dev-email">Email</Label>
               <Input
                 id="dev-email"
                 type="email"
                 value={devEmail}
                 onChange={(e) => setDevEmail(e.target.value)}
-                placeholder="Enter email address"
+                placeholder="Enter email"
                 disabled={devLoading}
-                className="border-slate-300 focus:border-slate-500 focus:ring-slate-500"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="dev-password" className="text-slate-700">
-                Password
-              </Label>
+              <Label htmlFor="dev-password">Password</Label>
               <div className="relative">
                 <Input
                   id="dev-password"
@@ -735,13 +642,13 @@ export default function AuthPage() {
                   onChange={(e) => setDevPassword(e.target.value)}
                   placeholder="Enter password"
                   disabled={devLoading}
-                  className="border-slate-300 focus:border-slate-500 focus:ring-slate-500 pr-10"
+                  className="pr-10"
                 />
                 <button
                   type="button"
                   onClick={() => setShowDevPassword(!showDevPassword)}
                   disabled={devLoading}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
                 >
                   {showDevPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
@@ -758,15 +665,15 @@ export default function AuthPage() {
               <Button
                 onClick={handleDevModeLogin}
                 disabled={devLoading || !devEmail || !devPassword}
-                className="flex-1 bg-slate-900 hover:bg-slate-800 text-white"
+                className="flex-1 bg-black hover:bg-gray-800"
               >
                 {devLoading ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Authenticating...
+                    Signing in...
                   </>
                 ) : (
-                  "Access System"
+                  "Access Admin"
                 )}
               </Button>
               <Button
@@ -776,14 +683,9 @@ export default function AuthPage() {
                   clearDevForm()
                 }}
                 disabled={devLoading}
-                className="border-slate-300 text-slate-700 hover:bg-slate-50"
               >
                 Cancel
               </Button>
-            </div>
-
-            <div className="text-xs text-slate-500 text-center">
-              Super administrator access only. All login attempts are logged.
             </div>
           </div>
         </DialogContent>
